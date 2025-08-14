@@ -79,6 +79,12 @@
     <ClCompile Include="src\audio\Music.cpp">
       <Filter>src\audio</Filter>
     </ClCompile>
+    <ClCompile Include="src\components\Button.cpp">
+      <Filter>src\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\TextInput.cpp">
+      <Filter>src\components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\components\Button.h">
@@ -119,6 +125,9 @@
     </ClInclude>
     <ClInclude Include="src\states\state.h">
       <Filter>src\states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\TextInput.h">
+      <Filter>src\components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

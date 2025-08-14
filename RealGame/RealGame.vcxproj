@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClInclude Include="src\audio\Music.h" />
     <ClInclude Include="src\components\Button.h" />
+    <ClInclude Include="src\components\TextInput.h" />
     <ClInclude Include="src\entity\dynamicObj.h" />
     <ClInclude Include="src\core\Game.h" />
     <ClInclude Include="src\entity\staticObj.h" />
@@ -143,6 +144,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\audio\Music.cpp" />
+    <ClCompile Include="src\components\Button.cpp" />
+    <ClCompile Include="src\components\TextInput.cpp" />
     <ClCompile Include="src\entity\dynamicObj.cpp" />
     <ClCompile Include="src\core\Game.cpp" />
     <ClCompile Include="src\core\main.cpp" />
