@@ -1,0 +1,9 @@
+#Visual Studio
+.vs/
+.vscode/
+
+#Build && Compiler
+Debug/
+x64/
+
+#CMake

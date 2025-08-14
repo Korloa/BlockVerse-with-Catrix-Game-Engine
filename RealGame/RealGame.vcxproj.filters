@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{fb198676-cf81-4247-b06d-b3663e4f5359}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core">
+      <UniqueIdentifier>{41d9ef74-e6ee-461e-98c7-ddbd76e2c0bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\audio">
+      <UniqueIdentifier>{1bc91777-d94e-4aea-b6f1-6b5c25fb95d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\world">
+      <UniqueIdentifier>{db684e9b-c433-4632-aac1-6039f455d27e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\debug">
+      <UniqueIdentifier>{212815f3-a336-4cb4-8d10-bbb862e76792}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\render">
+      <UniqueIdentifier>{6a30af24-b538-44e1-82e9-ab3f36e46e3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\entity">
+      <UniqueIdentifier>{2c03b06b-b14b-4e80-b52c-2730b29c28d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\test">
+      <UniqueIdentifier>{48b8b006-0417-4fd5-90b1-546b9ef4b53e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="about">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="src\components">
+      <UniqueIdentifier>{00f5cf43-efef-4477-9cd5-396e84b8cb77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assets">
+      <UniqueIdentifier>{d1fc4a27-9bae-47c4-aca9-c27cda8a1d5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\utils">
+      <UniqueIdentifier>{ac397bec-b417-4a07-98a1-db8ea135b882}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\states">
+      <UniqueIdentifier>{6fa32b31-55af-41bc-a21e-74345316c885}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\core\main.cpp">
+      <Filter>src\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\render\Camera.cpp">
+      <Filter>src\render</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\Chunk.cpp">
+      <Filter>src\world</Filter>
+    </ClCompile>
+    <ClCompile Include="src\debug\Console.cpp">
+      <Filter>src\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entity\dynamicObj.cpp">
+      <Filter>src\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\World.cpp">
+      <Filter>src\world</Filter>
+    </ClCompile>
+    <ClCompile Include="src\test\Test.cpp">
+      <Filter>src\test</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entity\staticObj.cpp">
+      <Filter>src\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\render\Shader.cpp">
+      <Filter>src\render</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Game.cpp">
+      <Filter>src\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\Noise.cpp">
+      <Filter>src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\audio\Music.cpp">
+      <Filter>src\audio</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\components\Button.h">
+      <Filter>src\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\render\Camera.h">
+      <Filter>src\render</Filter>
+    </ClInclude>
+    <ClInclude Include="src\world\Chunk.h">
+      <Filter>src\world</Filter>
+    </ClInclude>
+    <ClInclude Include="src\debug\Console.h">
+      <Filter>src\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entity\dynamicObj.h">
+      <Filter>src\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="src\world\World.h">
+      <Filter>src\world</Filter>
+    </ClInclude>
+    <ClInclude Include="src\test\Test.h">
+      <Filter>src\test</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entity\staticObj.h">
+      <Filter>src\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="src\render\Shader.h">
+      <Filter>src\render</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\Game.h">
+      <Filter>src\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\Noise.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\audio\Music.h">
+      <Filter>src\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="src\states\state.h">
+      <Filter>src\states</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\shader\vertex.glsl">
+      <Filter>assets</Filter>
+    </None>
+    <None Include="assets\shader\fragment.glsl">
+      <Filter>assets</Filter>
+    </None>
+    <None Include="readme.md">
+      <Filter>about</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="assets\font\pixelFont.ttf">
+      <Filter>assets</Filter>
+    </Font>
+  </ItemGroup>
+</Project>
