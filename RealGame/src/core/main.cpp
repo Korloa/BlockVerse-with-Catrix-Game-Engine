@@ -7,6 +7,10 @@
 
 //Code::STAT API KorloaCode SFMyNTY.UzI5eWJHOWgjI01qVTVOVFk9.JJDTpit5wYSNClmT8SeeZK4wUPKfYWPebnfVXwmTq_Q
 
+//目前为单线程模式，以后引擎成熟需要用多线程来优化性能瓶颈，多线程的几个可能优化方向
+
+
+
 #include <iostream>
 #include "debug/Console.h"
 #include "core/Game.h"

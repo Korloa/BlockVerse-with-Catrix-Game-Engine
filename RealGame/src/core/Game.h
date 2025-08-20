@@ -26,6 +26,13 @@ glEnable glCreateShader*/
 
 #include "render/Camera.h"
 
+#include "components/Button.h"
+
+#include "render/text/TextRender.h"
+
+#include "render/2dObj/RectRender.h"
+
+
 class Game {
 public:
 	Game();
@@ -34,16 +41,20 @@ public:
 	bool initialize();
 	void run();
 	void cleanup();
-
-private:
 	// 游戏窗口
 	GLFWwindow* gameWindow;
+private:
 	// 光影
 	Shader* shader;
 	// 摄像机
 	Camera* camera;
 	// 主世界
 	World* world;
+
+	TextRender* textRender; // 添加 TextRenderer
+	RectRender* rectRender; // 添加 RectRenderer
+	Button* testButton; // 测试按钮
+
 
 	float deltaTime;
 	float lastFrame;
@@ -58,11 +69,8 @@ private:
 	static void framebuffer_size_callback(GLFWwindow* gameWindow, int width, int height);
 	static void mouse_callback(GLFWwindow* gameWindow, double xpos, double ypos);
 	static void scroll_callback(GLFWwindow* gameWindow, double xoffset, double yoffset);
+	static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 
-
-	//temp tool render set
-	void renderRect();
-	void renderText();
 };
 
 

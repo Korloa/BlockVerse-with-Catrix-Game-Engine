@@ -41,6 +41,51 @@
     <Filter Include="src\states">
       <UniqueIdentifier>{6fa32b31-55af-41bc-a21e-74345316c885}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\physics">
+      <UniqueIdentifier>{7ce66ec8-a2ef-4f19-96eb-a70e3268ab41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\render\text">
+      <UniqueIdentifier>{7391743e-ab37-491e-8a7f-b7f6a4fa4d13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\render\2dObj">
+      <UniqueIdentifier>{fa20a39f-be4d-4523-b0d9-158cd0f39488}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\render\3dObj">
+      <UniqueIdentifier>{fed4c3ed-7e17-4fa9-b9a5-4157a9c8d8f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\states\basic">
+      <UniqueIdentifier>{542ff764-4315-49a0-9aa3-6ac46fab596f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\states\flashscreen">
+      <UniqueIdentifier>{fa611d2e-fca2-43a1-abbe-1262737cf7fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\states\menuState">
+      <UniqueIdentifier>{e4a944be-fe0f-4805-8f46-eb46fc1ef5ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\states\settingState">
+      <UniqueIdentifier>{6728d466-db52-481c-af50-bb452d44cf6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\states\slide">
+      <UniqueIdentifier>{dff93193-a22f-4db6-a397-870ce2b35463}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\states\gameState">
+      <UniqueIdentifier>{51bad6c2-1aee-46af-8595-ded15a10a9c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assets\font">
+      <UniqueIdentifier>{5d6bf49f-4b1c-45f6-91ae-2862ea122cc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assets\render">
+      <UniqueIdentifier>{ee7f7cca-27b2-429c-ab54-9e2e8c33fd81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assets\logo">
+      <UniqueIdentifier>{aa2d17f7-2d40-41bd-b276-9aa993b10e86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\render\image">
+      <UniqueIdentifier>{227d576d-edb6-4184-a6ef-bd9807fe180c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\net">
+      <UniqueIdentifier>{9260a6cd-27f4-45f3-9c6f-7d4fe8209fd9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\core\main.cpp">
@@ -85,6 +130,30 @@
     <ClCompile Include="src\components\TextInput.cpp">
       <Filter>src\components</Filter>
     </ClCompile>
+    <ClCompile Include="src\render\text\TextRender.cpp">
+      <Filter>src\render\text</Filter>
+    </ClCompile>
+    <ClCompile Include="src\states\flashScreen\FlashScreen.cpp">
+      <Filter>src\states\flashscreen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\states\gameState\GameState.cpp">
+      <Filter>src\states\gameState</Filter>
+    </ClCompile>
+    <ClCompile Include="src\states\menuState\MenuState.cpp">
+      <Filter>src\states\menuState</Filter>
+    </ClCompile>
+    <ClCompile Include="src\render\2dObj\RectRender.cpp">
+      <Filter>src\render\2dObj</Filter>
+    </ClCompile>
+    <ClCompile Include="src\states\settingState\SettingState.cpp">
+      <Filter>src\states\settingState</Filter>
+    </ClCompile>
+    <ClCompile Include="src\states\slide\SlideState.cpp">
+      <Filter>src\states\slide</Filter>
+    </ClCompile>
+    <ClCompile Include="src\render\image\ImageRender.cpp">
+      <Filter>src\render\image</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\components\Button.h">
@@ -123,27 +192,69 @@
     <ClInclude Include="src\audio\Music.h">
       <Filter>src\audio</Filter>
     </ClInclude>
-    <ClInclude Include="src\states\state.h">
-      <Filter>src\states</Filter>
-    </ClInclude>
     <ClInclude Include="src\components\TextInput.h">
       <Filter>src\components</Filter>
     </ClInclude>
+    <ClInclude Include="src\render\text\TextRender.h">
+      <Filter>src\render\text</Filter>
+    </ClInclude>
+    <ClInclude Include="src\states\flashScreen\FlashScreen.h">
+      <Filter>src\states\flashscreen</Filter>
+    </ClInclude>
+    <ClInclude Include="src\states\gameState\GameState.h">
+      <Filter>src\states\gameState</Filter>
+    </ClInclude>
+    <ClInclude Include="src\states\menuState\MenuState.h">
+      <Filter>src\states\menuState</Filter>
+    </ClInclude>
+    <ClInclude Include="src\render\2dObj\RectRender.h">
+      <Filter>src\render\2dObj</Filter>
+    </ClInclude>
+    <ClInclude Include="src\states\slide\SlideState.h">
+      <Filter>src\states\slide</Filter>
+    </ClInclude>
+    <ClInclude Include="src\states\settingState\SettingState.h">
+      <Filter>src\states\settingState</Filter>
+    </ClInclude>
+    <ClInclude Include="src\states\basic\State.h">
+      <Filter>src\states\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="src\render\image\ImageRender.h">
+      <Filter>src\render\image</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\shader\vertex.glsl">
-      <Filter>assets</Filter>
-    </None>
-    <None Include="assets\shader\fragment.glsl">
-      <Filter>assets</Filter>
-    </None>
     <None Include="readme.md">
       <Filter>about</Filter>
+    </None>
+    <None Include="assets\render\fragment.glsl">
+      <Filter>assets\render</Filter>
+    </None>
+    <None Include="assets\render\rect_fragment.glsl">
+      <Filter>assets\render</Filter>
+    </None>
+    <None Include="assets\render\rect_vertex.glsl">
+      <Filter>assets\render</Filter>
+    </None>
+    <None Include="assets\render\text_fragment.glsl">
+      <Filter>assets\render</Filter>
+    </None>
+    <None Include="assets\render\text_vertex.glsl">
+      <Filter>assets\render</Filter>
+    </None>
+    <None Include="assets\render\image_fragment.glsl">
+      <Filter>assets\render</Filter>
+    </None>
+    <None Include="assets\render\image_vertex.glsl">
+      <Filter>assets\render</Filter>
+    </None>
+    <None Include="assets\render\vertex.glsl">
+      <Filter>src</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Font Include="assets\font\pixelFont.ttf">
-      <Filter>assets</Filter>
+      <Filter>assets\font</Filter>
     </Font>
   </ItemGroup>
 </Project>

@@ -120,6 +120,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -134,9 +135,17 @@
     <ClInclude Include="src\core\Game.h" />
     <ClInclude Include="src\entity\staticObj.h" />
     <ClInclude Include="src\debug\Console.h" />
+    <ClInclude Include="src\render\2dObj\RectRender.h" />
     <ClInclude Include="src\render\Camera.h" />
+    <ClInclude Include="src\render\image\ImageRender.h" />
     <ClInclude Include="src\render\Shader.h" />
-    <ClInclude Include="src\states\state.h" />
+    <ClInclude Include="src\render\text\TextRender.h" />
+    <ClInclude Include="src\states\basic\State.h" />
+    <ClInclude Include="src\states\flashScreen\FlashScreen.h" />
+    <ClInclude Include="src\states\gameState\GameState.h" />
+    <ClInclude Include="src\states\menuState\MenuState.h" />
+    <ClInclude Include="src\states\settingState\SettingState.h" />
+    <ClInclude Include="src\states\slide\SlideState.h" />
     <ClInclude Include="src\test\Test.h" />
     <ClInclude Include="src\utils\Noise.h" />
     <ClInclude Include="src\world\Chunk.h" />
@@ -151,16 +160,30 @@
     <ClCompile Include="src\core\main.cpp" />
     <ClCompile Include="src\entity\staticObj.cpp" />
     <ClCompile Include="src\debug\Console.cpp" />
+    <ClCompile Include="src\render\2dObj\RectRender.cpp" />
     <ClCompile Include="src\render\Camera.cpp" />
+    <ClCompile Include="src\render\image\ImageRender.cpp" />
     <ClCompile Include="src\render\Shader.cpp" />
+    <ClCompile Include="src\render\text\TextRender.cpp" />
+    <ClCompile Include="src\states\flashScreen\FlashScreen.cpp" />
+    <ClCompile Include="src\states\gameState\GameState.cpp" />
+    <ClCompile Include="src\states\menuState\MenuState.cpp" />
+    <ClCompile Include="src\states\settingState\SettingState.cpp" />
+    <ClCompile Include="src\states\slide\SlideState.cpp" />
     <ClCompile Include="src\test\Test.cpp" />
     <ClCompile Include="src\utils\Noise.cpp" />
     <ClCompile Include="src\world\Chunk.cpp" />
     <ClCompile Include="src\world\World.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\shader\fragment.glsl" />
-    <None Include="assets\shader\vertex.glsl" />
+    <None Include="assets\render\fragment.glsl" />
+    <None Include="assets\render\image_fragment.glsl" />
+    <None Include="assets\render\image_vertex.glsl" />
+    <None Include="assets\render\rect_fragment.glsl" />
+    <None Include="assets\render\rect_vertex.glsl" />
+    <None Include="assets\render\text_fragment.glsl" />
+    <None Include="assets\render\text_vertex.glsl" />
+    <None Include="assets\render\vertex.glsl" />
     <None Include="readme.md" />
   </ItemGroup>
   <ItemGroup>
