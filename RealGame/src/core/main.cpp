@@ -13,7 +13,7 @@
 
 #include <iostream>
 #include "debug/Console.h"
-#include "core/Game.h"
+#include "core/GameController.h"
 
 
 #include "test/Test.h"
@@ -25,7 +25,7 @@ int main(int argc,char* argv[]) {
 
 	//TEST_MODE
 
-	Game mainGame;
+	GameController mainGame;
 
 	if (!mainGame.initialize()) {
 		console.error("An Error happened while initializing the mainGame.");

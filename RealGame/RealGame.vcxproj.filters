@@ -86,6 +86,12 @@
     <Filter Include="src\net">
       <UniqueIdentifier>{9260a6cd-27f4-45f3-9c6f-7d4fe8209fd9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\UI">
+      <UniqueIdentifier>{7a0db497-2398-4260-acf2-a0353151ae87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assets\slide">
+      <UniqueIdentifier>{e8b2e6a6-08b1-4b21-9bda-771ca94d29ed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\core\main.cpp">
@@ -115,7 +121,7 @@
     <ClCompile Include="src\render\Shader.cpp">
       <Filter>src\render</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\Game.cpp">
+    <ClCompile Include="src\core\GameController.cpp">
       <Filter>src\core</Filter>
     </ClCompile>
     <ClCompile Include="src\utils\Noise.cpp">
@@ -154,6 +160,9 @@
     <ClCompile Include="src\render\image\ImageRender.cpp">
       <Filter>src\render\image</Filter>
     </ClCompile>
+    <ClCompile Include="src\core\GameConfig.cpp">
+      <Filter>src\core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\components\Button.h">
@@ -183,7 +192,7 @@
     <ClInclude Include="src\render\Shader.h">
       <Filter>src\render</Filter>
     </ClInclude>
-    <ClInclude Include="src\core\Game.h">
+    <ClInclude Include="src\core\GameController.h">
       <Filter>src\core</Filter>
     </ClInclude>
     <ClInclude Include="src\utils\Noise.h">
@@ -222,6 +231,9 @@
     <ClInclude Include="src\render\image\ImageRender.h">
       <Filter>src\render\image</Filter>
     </ClInclude>
+    <ClInclude Include="src\core\gameConfig.h">
+      <Filter>src\core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="readme.md">
@@ -256,5 +268,16 @@
     <Font Include="assets\font\pixelFont.ttf">
       <Filter>assets\font</Filter>
     </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\logo\Catrix_Engine.png">
+      <Filter>assets\logo</Filter>
+    </Image>
+    <Image Include="assets\slide\slide_engine.png">
+      <Filter>assets\slide</Filter>
+    </Image>
+    <Image Include="assets\slide\slide_game.png">
+      <Filter>assets\slide</Filter>
+    </Image>
   </ItemGroup>
 </Project>

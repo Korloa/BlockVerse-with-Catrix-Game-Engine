@@ -91,6 +91,20 @@ void Shader::use() {
 	glUseProgram(ID);
 }
 
+// 设置 float 类型 uniform
+void Shader::setFloat(const std::string& name, float value) const {
+	glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
+}
+
+// 设置 vec2 类型 uniform（从 glm::vec2）
+void Shader::setVec2(const std::string& name, const glm::vec2& value) const {
+	glUniform2fv(glGetUniformLocation(ID, name.c_str()), 1, glm::value_ptr(value));
+	// 或者：&value[0]
+}
+void Shader::setVec2(const std::string& name, float x, float y) const {
+	glUniform2f(glGetUniformLocation(ID, name.c_str()), x, y);
+}
+
 //？
 void Shader::setMat4(const std::string& name,const glm::mat4& mat) const{
 	glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, &mat[0][0]);

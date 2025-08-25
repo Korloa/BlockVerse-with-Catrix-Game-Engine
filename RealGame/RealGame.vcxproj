@@ -103,13 +103,14 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\Users\Korloa\vcpkg\installed\x64-windows\include;F:\WorkSpace\RealGame\RealGame\src</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Users\Korloa\vcpkg\installed\x64-windows\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3dll.lib;glew32.lib
-;OpenGL32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3dll.lib;glew32.lib;OpenGL32.Lib;freetype.lib</AdditionalDependencies>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -121,18 +122,23 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <AdditionalIncludeDirectories>C:\Users\Korloa\vcpkg\installed\x64-windows\include;F:\WorkSpace\RealGame\RealGame\src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\Korloa\vcpkg\installed\x64-windows\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3dll.lib;glew32.lib;OpenGL32.Lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\audio\Music.h" />
     <ClInclude Include="src\components\Button.h" />
     <ClInclude Include="src\components\TextInput.h" />
+    <ClInclude Include="src\core\gameConfig.h" />
     <ClInclude Include="src\entity\dynamicObj.h" />
-    <ClInclude Include="src\core\Game.h" />
+    <ClInclude Include="src\core\GameController.h" />
     <ClInclude Include="src\entity\staticObj.h" />
     <ClInclude Include="src\debug\Console.h" />
     <ClInclude Include="src\render\2dObj\RectRender.h" />
@@ -155,8 +161,9 @@
     <ClCompile Include="src\audio\Music.cpp" />
     <ClCompile Include="src\components\Button.cpp" />
     <ClCompile Include="src\components\TextInput.cpp" />
+    <ClCompile Include="src\core\GameConfig.cpp" />
     <ClCompile Include="src\entity\dynamicObj.cpp" />
-    <ClCompile Include="src\core\Game.cpp" />
+    <ClCompile Include="src\core\GameController.cpp" />
     <ClCompile Include="src\core\main.cpp" />
     <ClCompile Include="src\entity\staticObj.cpp" />
     <ClCompile Include="src\debug\Console.cpp" />
@@ -188,6 +195,11 @@
   </ItemGroup>
   <ItemGroup>
     <Font Include="assets\font\pixelFont.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\logo\Catrix_Engine.png" />
+    <Image Include="assets\slide\slide_engine.png" />
+    <Image Include="assets\slide\slide_game.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

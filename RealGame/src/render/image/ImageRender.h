@@ -2,6 +2,9 @@
 #include<GL/glew.h>
 #include<glm/glm.hpp>
 #include<glm/gtc/matrix_transform.hpp>
+#include<string>
+#include<unordered_map>
+#include <GLFW/glfw3.h>
 
 class Shader;
 
@@ -14,8 +17,18 @@ public:
 
 	bool initialize();
 
-	void renderImage(GLuint textureID, glm::vec2 position, glm::vec2 size, float alpha);
+	void renderImage(const std::string& imagePath, float x, float y, float width, float height, float alpha);
+
+	void renderTexture(GLuint texturID,float x,float y,float width,float height,float alpha);
+
+	GLuint loadTexture(const std::string& path);
+
+	void clearCache();
+	void clearCache(const std::string& path);
 private:
+
 	Shader* imageShader;
-	GLuint vao, vbo;
+	GLuint vao, vbo,ebo;
+
+	std::unordered_map<std::string, GLuint>textureCache;
 };

@@ -1,5 +1,5 @@
 #include "Button.h"
-#include "core/Game.h"
+#include "core/GameController.h"
 
 void Button::render(Game* game,TextRender* textRender,RectRender* rectRender, double mouseX, double mouseY) {
 	//要改进两个方向，每个game对应一个render渲染器，render来接手Rect,Text渲染而非game
