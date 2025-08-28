@@ -15,7 +15,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 //后期可以更改
-const int renderDistance = 20;
+const int renderDistance = 5;
 
 class World {
 public:

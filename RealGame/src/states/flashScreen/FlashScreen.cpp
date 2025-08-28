@@ -4,19 +4,19 @@
 
 void FlashScreen::update(GameController* game, float deltaTime) {
 	startTime += deltaTime;
-	if (startTime >= 3.5f) {
+	if (startTime >= 2.8f) {
 		game->popState();
 		game->pushState(new SlideState());
 	}
 
-	if (startTime <= 1.0f) {
+	if (startTime <= 0.8f) {
 		alpha = ease(startTime / 1.0f);
 	}
-	else if (startTime <= 2.5f) {
+	else if (startTime <= 2.0f) {
 		alpha = 1.0f;
 	}
 	else {
-		alpha = 1 - ease((startTime-2.5f) / 1.0f);
+		alpha = 1 - ease((startTime-2.0f) / 0.8f);
 	}
 }
 

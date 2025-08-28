@@ -36,7 +36,7 @@ bool GameState::enter(GameController* game){
 }
 
 void GameState::update(GameController* game, float deltaTime) {
-	exit(game);
+
 }
 
 void GameState::render(GameController* game) {

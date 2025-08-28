@@ -6,8 +6,7 @@
 #include "states/gameState/GameState.h"			//游戏中
 #include "states/settingState/SettingState.h"	//设置
 #include "states/menuState/MenuState.h"			//菜单
-
-
+#include "core/InputManager.h"
 
 GameController* gameInstance = nullptr;
 
@@ -60,6 +59,7 @@ float GameController::calcFrame() {
 
 void GameController::run() {
 	while (isControllerAlive()) {
+		//存在一些问题，无法关闭窗口
 		float delta = calcFrame();
 		if (!stateStack.empty()) {
 			stateStack.back()->procInput(this,delta);
@@ -132,4 +132,9 @@ void GameController::cleanup() {
 		delete rectRender;
 	
 	glfwTerminate();
+}
+
+void GameController::kill() {
+	console.info("Recive the exit command."); 
+	//gameAlive = false; 
 }

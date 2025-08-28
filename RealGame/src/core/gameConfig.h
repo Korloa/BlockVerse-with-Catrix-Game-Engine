@@ -45,11 +45,11 @@ struct gameConfig {
 
 
 		//Setting
-		windowWidth = 1024;
-		windowHeight = 768;
+		windowWidth = 1920;
+		windowHeight = 1080;
 
-		frameBufferWidth = 1024;
-		frameBufferHeight = 768;
+		frameBufferWidth = 1920;
+		frameBufferHeight = 1080;
 
 		winMode = windowMode::FULLSCREEN;
 

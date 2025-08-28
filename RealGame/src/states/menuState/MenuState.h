@@ -8,4 +8,10 @@ public:
 
 	bool enter(GameController* game) override;
 	bool exit(GameController* game) override;
+
+	float buttonWidth = 700.0f;
+	float buttonHeight = 70.0f;
+
+	float buttonMargin = 110.0f;
+	float buttonTop = 480.0f;
 };

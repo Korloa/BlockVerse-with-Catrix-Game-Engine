@@ -10,6 +10,12 @@ class Shader;
 
 //可以发现每个渲染器都是具有相同结构，initialize,render,构造与解构
 
+struct imageInfo {
+	int width;
+	int height;
+	int ch;
+};
+
 class ImageRender {
 public:
 	ImageRender();
@@ -22,6 +28,8 @@ public:
 	void renderTexture(GLuint texturID,float x,float y,float width,float height,float alpha);
 
 	GLuint loadTexture(const std::string& path);
+
+	void getImageAttrib(const std::string& path,imageInfo* img);
 
 	void clearCache();
 	void clearCache(const std::string& path);

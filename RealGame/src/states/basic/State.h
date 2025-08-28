@@ -6,13 +6,12 @@
 #include "components/TextInput.h"
 #include "core/GameController.h"
 
-#include<GLFW/glfw3.h>
-
 class TextRender;
 class RectRender;
 
 class State {
 protected:
+	std::vector<Button>sharedButtons;				//公有按钮，不会随页面切换而切换
 	std::vector<int> pageStack;
 	std::map<int, std::vector<Button>>pageButtons;
 	//std::map<int, std::vector<TextInput>>pageTextInputs;	//尚未实现

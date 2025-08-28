@@ -1,11 +1,12 @@
 #include "states/slide/SlideState.h"
 #include "states/menuState/MenuState.h"
 
+#include "utils/GLFWextension.h"
 //enter和构造函数还是有所区别的
-SlideState::SlideState() :timer(0.0f),alpha(0.0f),transition(0.8f),lastTime(2.5f),imageIndex(0){
+SlideState::SlideState() :timer(0.0f),alpha(0.0f),transition(0.5f),lastTime(2.5f),imageIndex(0),mainWindow(nullptr){
 	imagePath = {
-		"flashscreen/slide_engine",
-		"flashscreen/slide_game"
+		"slide/slide_engine.png",
+		"slide/slide_game.png"
 	};
 };
 
@@ -18,21 +19,36 @@ void SlideState::update(GameController* game, float deltaTime) {
 		alpha = 1.0f;
 	}
 	else if (timer > (lastTime - transition) && timer <= lastTime) {
-		alpha = (transition-lastTime+timer)/transition;
+		alpha = 1.0f - (transition-lastTime+timer)/transition;
 	}//else表示一个幻灯片播放完毕了
 	else {
-		imageIndex = (imageIndex + 1) % imagePath.size();
-		//一轮循环已经结束
-		if (imageIndex == 0) {
-			game->replaceState(new MenuState());
-		}
 
 		alpha = 0.0f;
 		timer = 0.0f;
+
+		imageIndex++;
+		//一轮循环已经结束
+		if (imageIndex == imagePath.size()) {
+			game->replaceState(new MenuState());
+			return;
+		}
 	}
 }
 
 void SlideState::render(GameController* game) {
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	imageInfo* tempImg = new imageInfo();
+	game->imageRender->getImageAttrib(imagePath[imageIndex], tempImg);
+	game->imageRender->renderImage(
+		imagePath[imageIndex],     // 图片路径
+		0, 0,                    // 左下角 x, y
+		tempImg->width, tempImg->height,                    // 宽高
+		alpha                        // 透明度
+	);
+
+	delete tempImg;
 
 }
 
@@ -41,8 +57,23 @@ bool SlideState::enter(GameController* game) {
 
 	GLFWmonitor* monitor = glfwGetPrimaryMonitor();
 	const GLFWvidmode* videoMode = glfwGetVideoMode(monitor);
-	mainWindow = glfwCreateWindow(videoMode->width, videoMode->height, "BlockVerse", monitor, NULL);
+	mainWindow = glfwCreateWindow(videoMode->width, videoMode->height, "BlockVerse",monitor, NULL);
 	game->setWindowInstance(mainWindow);
+
+	glfwMakeContextCurrent(mainWindow);
+
+	setWindowIcon(mainWindow, "logo/blockverse_logo.png");
+
+	if (glewInit() != GLEW_OK) {
+		console.error("Failed to initialize GLEW");
+		return false;
+	}
+
+	if (!game->imageRender->initialize()) {
+		console.error("Failed to initialize ImageRender");
+		return false;
+	}
+
 	return true;
 }
 

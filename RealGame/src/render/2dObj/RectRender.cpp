@@ -41,7 +41,7 @@ bool RectRender::initialize() {
 
 void RectRender::renderRect(glm::vec2 position, glm::vec2 size, glm::vec3 color){
 	rectShader->use();
-	glm::mat4 projection = glm::ortho(0.0f, 1024.0f, 0.0f, 768.0f);
+	glm::mat4 projection = glm::ortho(0.0f, 1920.0f,1080.0f, 0.0f);
 	rectShader->setMat4("projection", projection);
 	rectShader->setVec3("color", color);
 	float vertices[] = {

@@ -11,6 +11,8 @@
 #include "render/2dObj/RectRender.h"
 #include "render/image/ImageRender.h"
 
+#include "core/InputManager.h"
+
 // State类应该使用前向声明，这里出现了循环包含头文件的问题，出现了编译错误，这里如果包含的话会出现顺序问题
 class State;
 
@@ -38,12 +40,14 @@ private:
 public:
 	gameConfig* getConfig() { return cfg; }
 
+	InputManager& getInputManager() { return InputManager::getInstance(); }
+
 	TextRender* textRender;
 	ImageRender* imageRender;
 	RectRender* rectRender;
 
 	bool isControllerAlive() { return gameAlive; }
-	void kill() { gameAlive = false; }
+	void kill();
 
 	GameController();
 	~GameController();
@@ -61,9 +65,6 @@ public:
 	void pushState(State* state);
 	void popState();
 	void replaceState(State* state);
-
-	GLFWwindow* getWindow()const { return gameWindow; }
-	float getDeltaTime()const { return deltaTime; }
 
 	static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 };

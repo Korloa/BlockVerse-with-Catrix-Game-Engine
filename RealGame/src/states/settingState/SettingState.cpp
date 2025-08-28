@@ -1,5 +1,12 @@
 #include "states/settingState/SettingState.h"
 
+enum Setting {
+	MAIN,
+	SCREEN,
+	GAME,
+};
+
+
 void SettingState::update(GameController* game, float deltaTime) {
 
 }

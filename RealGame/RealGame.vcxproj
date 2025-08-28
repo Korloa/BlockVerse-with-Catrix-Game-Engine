@@ -102,14 +102,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Korloa\vcpkg\installed\x64-windows\include;F:\WorkSpace\RealGame\RealGame\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Korloa\vcpkg\installed\x64-windows\include;F:\WorkSpace\RealGame\RealGame\src;C:\Users\Korloa\vcpkg\installed\x64-windows-static\include</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Korloa\vcpkg\installed\x64-windows\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3dll.lib;glew32.lib;OpenGL32.Lib;freetype.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Korloa\vcpkg\installed\x64-windows\lib;C:\Users\Korloa\vcpkg\installed\x64-windows-static\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3dll.lib;glew32.lib;OpenGL32.Lib;freetype.lib;imgui.lib</AdditionalDependencies>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
@@ -137,6 +137,7 @@
     <ClInclude Include="src\components\Button.h" />
     <ClInclude Include="src\components\TextInput.h" />
     <ClInclude Include="src\core\gameConfig.h" />
+    <ClInclude Include="src\core\InputManager.h" />
     <ClInclude Include="src\entity\dynamicObj.h" />
     <ClInclude Include="src\core\GameController.h" />
     <ClInclude Include="src\entity\staticObj.h" />
@@ -148,11 +149,16 @@
     <ClInclude Include="src\render\text\TextRender.h" />
     <ClInclude Include="src\states\basic\State.h" />
     <ClInclude Include="src\states\flashScreen\FlashScreen.h" />
+    <ClInclude Include="src\states\gameLoader\GameLoader.h" />
     <ClInclude Include="src\states\gameState\GameState.h" />
+    <ClInclude Include="src\states\loadingTransition\loadingTransition.h" />
     <ClInclude Include="src\states\menuState\MenuState.h" />
+    <ClInclude Include="src\states\netGameStarter\netGameStarter.h" />
     <ClInclude Include="src\states\settingState\SettingState.h" />
+    <ClInclude Include="src\states\singleGameStarter\SingleGameStarter.h" />
     <ClInclude Include="src\states\slide\SlideState.h" />
     <ClInclude Include="src\test\Test.h" />
+    <ClInclude Include="src\utils\GLFWextension.h" />
     <ClInclude Include="src\utils\Noise.h" />
     <ClInclude Include="src\world\Chunk.h" />
     <ClInclude Include="src\world\World.h" />
@@ -162,6 +168,7 @@
     <ClCompile Include="src\components\Button.cpp" />
     <ClCompile Include="src\components\TextInput.cpp" />
     <ClCompile Include="src\core\GameConfig.cpp" />
+    <ClCompile Include="src\core\InputManager.cpp" />
     <ClCompile Include="src\entity\dynamicObj.cpp" />
     <ClCompile Include="src\core\GameController.cpp" />
     <ClCompile Include="src\core\main.cpp" />
@@ -173,16 +180,22 @@
     <ClCompile Include="src\render\Shader.cpp" />
     <ClCompile Include="src\render\text\TextRender.cpp" />
     <ClCompile Include="src\states\flashScreen\FlashScreen.cpp" />
+    <ClCompile Include="src\states\gameLoader\GameLoader.cpp" />
     <ClCompile Include="src\states\gameState\GameState.cpp" />
+    <ClCompile Include="src\states\loadingTransition\loadingTransition.cpp" />
     <ClCompile Include="src\states\menuState\MenuState.cpp" />
+    <ClCompile Include="src\states\netGameStarter\netGameStarter.cpp" />
     <ClCompile Include="src\states\settingState\SettingState.cpp" />
+    <ClCompile Include="src\states\singleGameStarter\SingleGameStarter.cpp" />
     <ClCompile Include="src\states\slide\SlideState.cpp" />
-    <ClCompile Include="src\test\Test.cpp" />
+    <ClCompile Include="src\utils\GLFWextension.cpp" />
     <ClCompile Include="src\utils\Noise.cpp" />
     <ClCompile Include="src\world\Chunk.cpp" />
     <ClCompile Include="src\world\World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="assets\render\blur_fragment.glsl" />
+    <None Include="assets\render\blur_vertex.glsl" />
     <None Include="assets\render\fragment.glsl" />
     <None Include="assets\render\image_fragment.glsl" />
     <None Include="assets\render\image_vertex.glsl" />
@@ -197,9 +210,14 @@
     <Font Include="assets\font\pixelFont.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="assets\logo\blockverse_title.png" />
+    <Image Include="assets\logo\slide_game.png" />
     <Image Include="assets\logo\Catrix_Engine.png" />
+    <Image Include="assets\logo\logo.ico" />
+    <Image Include="assets\logo\logo.png" />
+    <Image Include="assets\logo\blockverse_logo.png" />
     <Image Include="assets\slide\slide_engine.png" />
-    <Image Include="assets\slide\slide_game.png" />
+    <Image Include="assets\slide\slide_game_back.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

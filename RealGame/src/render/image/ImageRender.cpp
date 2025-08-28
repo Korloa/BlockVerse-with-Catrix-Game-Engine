@@ -154,3 +154,8 @@ void ImageRender::clearCache(const std::string& path) {
 		textureCache.erase(it);
 	}
 }
+
+
+void ImageRender::getImageAttrib(const std::string& path,imageInfo* img) {
+	stbi_load(path.c_str(), &(img->width), &(img->height), &(img->ch), 0);
+}

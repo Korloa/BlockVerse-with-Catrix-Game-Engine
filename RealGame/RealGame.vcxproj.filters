@@ -41,9 +41,6 @@
     <Filter Include="src\states">
       <UniqueIdentifier>{6fa32b31-55af-41bc-a21e-74345316c885}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\physics">
-      <UniqueIdentifier>{7ce66ec8-a2ef-4f19-96eb-a70e3268ab41}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\render\text">
       <UniqueIdentifier>{7391743e-ab37-491e-8a7f-b7f6a4fa4d13}</UniqueIdentifier>
     </Filter>
@@ -92,6 +89,24 @@
     <Filter Include="assets\slide">
       <UniqueIdentifier>{e8b2e6a6-08b1-4b21-9bda-771ca94d29ed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="assets\dependencies">
+      <UniqueIdentifier>{b4a8c599-500c-4cf0-a1e1-8afd15bc66e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\states\singleGameStarter">
+      <UniqueIdentifier>{94628878-0744-49ad-897c-c442e7cc948f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\states\netGameStarter">
+      <UniqueIdentifier>{837b224e-4fcf-4585-86f1-6525611bea08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\states\gameLoader">
+      <UniqueIdentifier>{ea40a907-1e4c-46ae-9921-816ed7f85590}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\render\physics">
+      <UniqueIdentifier>{7ce66ec8-a2ef-4f19-96eb-a70e3268ab41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\states\loadingTransition">
+      <UniqueIdentifier>{66c96149-6914-441e-b47c-a571a17d3fd6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\core\main.cpp">
@@ -111,9 +126,6 @@
     </ClCompile>
     <ClCompile Include="src\world\World.cpp">
       <Filter>src\world</Filter>
-    </ClCompile>
-    <ClCompile Include="src\test\Test.cpp">
-      <Filter>src\test</Filter>
     </ClCompile>
     <ClCompile Include="src\entity\staticObj.cpp">
       <Filter>src\entity</Filter>
@@ -162,6 +174,24 @@
     </ClCompile>
     <ClCompile Include="src\core\GameConfig.cpp">
       <Filter>src\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\states\gameLoader\GameLoader.cpp">
+      <Filter>src\states\gameLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\states\netGameStarter\netGameStarter.cpp">
+      <Filter>src\states\netGameStarter</Filter>
+    </ClCompile>
+    <ClCompile Include="src\states\singleGameStarter\SingleGameStarter.cpp">
+      <Filter>src\states\singleGameStarter</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\InputManager.cpp">
+      <Filter>src\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\GLFWextension.cpp">
+      <Filter>src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\states\loadingTransition\loadingTransition.cpp">
+      <Filter>src\states\loadingTransition</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -234,6 +264,24 @@
     <ClInclude Include="src\core\gameConfig.h">
       <Filter>src\core</Filter>
     </ClInclude>
+    <ClInclude Include="src\states\gameLoader\GameLoader.h">
+      <Filter>src\states\gameLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\states\netGameStarter\netGameStarter.h">
+      <Filter>src\states\netGameStarter</Filter>
+    </ClInclude>
+    <ClInclude Include="src\states\singleGameStarter\SingleGameStarter.h">
+      <Filter>src\states\singleGameStarter</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\InputManager.h">
+      <Filter>src\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\GLFWextension.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\states\loadingTransition\loadingTransition.h">
+      <Filter>src\states\loadingTransition</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="readme.md">
@@ -263,6 +311,12 @@
     <None Include="assets\render\vertex.glsl">
       <Filter>src</Filter>
     </None>
+    <None Include="assets\render\blur_fragment.glsl">
+      <Filter>assets\render</Filter>
+    </None>
+    <None Include="assets\render\blur_vertex.glsl">
+      <Filter>assets\render</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Font Include="assets\font\pixelFont.ttf">
@@ -276,7 +330,22 @@
     <Image Include="assets\slide\slide_engine.png">
       <Filter>assets\slide</Filter>
     </Image>
-    <Image Include="assets\slide\slide_game.png">
+    <Image Include="assets\slide\slide_game_back.png">
+      <Filter>assets\slide</Filter>
+    </Image>
+    <Image Include="assets\logo\logo.ico">
+      <Filter>assets\logo</Filter>
+    </Image>
+    <Image Include="assets\logo\logo.png">
+      <Filter>assets\logo</Filter>
+    </Image>
+    <Image Include="assets\logo\blockverse_title.png">
+      <Filter>assets\logo</Filter>
+    </Image>
+    <Image Include="assets\logo\blockverse_logo.png">
+      <Filter>assets\logo</Filter>
+    </Image>
+    <Image Include="assets\logo\slide_game.png">
       <Filter>assets\slide</Filter>
     </Image>
   </ItemGroup>
