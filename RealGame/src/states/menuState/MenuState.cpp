@@ -7,17 +7,59 @@
 #include "states/singleGameStarter/SingleGameStarter.h"
 #include "states/netGameStarter/netGameStarter.h"
 
+#include "render/Shader.h"
+#include "render/Camera.h"
+#include "world/World.h"
+
+
+
 enum MENU {
 	MAIN
 };
 
 void MenuState::update(GameController* game,float deltaTime) {
-	//game->kill();
+	menuCamera->cameraYaw += cameraSpeed * deltaTime;
+	if (menuCamera->cameraYaw >= 360.0f) {
+		menuCamera->cameraYaw -= 360.0f;
+	}
+
+	menuCamera->updateCameraVectors();
 }
 
 void MenuState::render(GameController* game) {
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
+	// 3D
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LESS);	//深度测试的比较函数
+	//GL_NEVER GL_LESS GL_LEQUAL GL_EQUAL GL_GREATER GL_GEQUAL GL_NOTEQUAL GL_ALWAYS
+	glClearColor(0.5f, 0.7f, 1.0f, 1.0f); // 天空蓝
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	menuShader->use();
+
+	glm::mat4 projection = glm::perspective(
+		glm::radians(menuCamera->cameraZoom),
+		(float)1920.0f / (float)1080.f,
+		0.1f, 1000.0f
+	);
+	menuShader->setMat4("projection", projection);
+
+	glm::mat4 view = menuCamera->getViewMatrix();
+	menuShader->setMat4("view", view);
+
+	glm::mat4 model = glm::mat4(1.0f);
+	menuShader->setMat4("model", model);
+
+	menuShader->setVec3("lightPos", glm::vec3(0.0f, 256.0f, 0.0f));
+	menuShader->setVec3("viewPos", menuCamera->cameraPosition);
+	menuShader->setVec3("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
+
+	menuWorld->render(*menuShader);
+
+	glDisable(GL_DEPTH_TEST); // 避免 UI 被深度测试挡住
+	glDisable(GL_CULL_FACE);
+
+	//UI
+	glClear(GL_DEPTH_BUFFER_BIT);
 
 	if (pageStack.empty())
 		return;
@@ -42,6 +84,9 @@ void MenuState::render(GameController* game) {
 }
 
 bool MenuState::enter(GameController* game) {
+	console.info("Entering the Menu State.");
+
+
 	if (!game->rectRender->initialize() || !game->textRender->initialize("font/pixelFont.ttf",30) || !game->imageRender->initialize()){
 		console.error("Fatal Error:cound not initialize rectRender in the MenuState.");
 		game->kill();
@@ -56,6 +101,17 @@ bool MenuState::enter(GameController* game) {
 		}
 	});
 
+	menuCamera = new Camera(
+		glm::vec3(0.0f, (float)horzion+30.0f, 0.0f),
+		glm::vec3(0.0f, 1.0f, 0.0f),
+		0.0f, 0.0f
+	);
+
+	//背景世界初始
+
+	menuShader = new Shader("render/vertex.glsl", "render/fragment.glsl");
+
+	menuWorld = new World(2757840732);
 
 	//glfwMakeContextCurrent(game->getWindowInstance());
 
@@ -79,8 +135,6 @@ bool MenuState::enter(GameController* game) {
 		}
 	);
 
-
-	console.info("Entering the Menu State.");
 	return true;
 }
 

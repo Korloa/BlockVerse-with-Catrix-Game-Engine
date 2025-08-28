@@ -308,13 +308,13 @@
     <None Include="assets\render\image_vertex.glsl">
       <Filter>assets\render</Filter>
     </None>
-    <None Include="assets\render\vertex.glsl">
-      <Filter>src</Filter>
-    </None>
     <None Include="assets\render\blur_fragment.glsl">
       <Filter>assets\render</Filter>
     </None>
     <None Include="assets\render\blur_vertex.glsl">
+      <Filter>assets\render</Filter>
+    </None>
+    <None Include="assets\render\vertex.glsl">
       <Filter>assets\render</Filter>
     </None>
   </ItemGroup>

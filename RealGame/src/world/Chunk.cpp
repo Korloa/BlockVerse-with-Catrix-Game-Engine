@@ -47,7 +47,7 @@ void Chunk::generateTerrain() {
 			int worldZ = (this->z * chunkSize) + this->z < 0 ? chunkSize - iz - 1 : iz;*/
 			int worldX = (this->x * chunkSize) +ix;
 			int worldZ = (this->z * chunkSize) +iz;
-			int height = horzion + 32 * noise.getFractal(worldX, worldZ, 6, 0.5f, 0.003f);
+			int height = horzion + 32 * noise.getFractal(worldX, worldZ, 6, 0.5f, 0.007f);
 
 			for (int iy = 0; iy < chunkHeight; iy++) {
 				if (iy <= 2) {
