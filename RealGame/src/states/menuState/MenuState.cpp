@@ -1,4 +1,11 @@
-﻿#pragma once
+﻿/*
+ * Copyright (c) 2025 Kaixiang Zhang (张凯翔). All rights reserved.
+ * Author: Kaixiang Zhang
+ * File: [Chunk.cpp]
+ * Description: [Control the generation logic of the chunk.]
+ */
+
+#pragma once
 
 #include "states/menuState/MenuState.h"	
 
@@ -11,52 +18,58 @@
 #include "render/Camera.h"
 #include "world/World.h"
 
-
+#include "states/loadingState/LoadingState.h"
 
 enum MENU {
 	MAIN
 };
 
 void MenuState::update(GameController* game,float deltaTime) {
-	menuCamera->cameraYaw += cameraSpeed * deltaTime;
-	if (menuCamera->cameraYaw >= 360.0f) {
-		menuCamera->cameraYaw -= 360.0f;
-	}
+	if (!LoadingState::getInstance().visible) {
+		menuCamera->cameraYaw += cameraSpeed * deltaTime;
+		if (menuCamera->cameraYaw >= 360.0f) {
+			menuCamera->cameraYaw -= 360.0f;
+		}
 
-	menuCamera->updateCameraVectors();
+		menuCamera->updateCameraVectors();
+	}
 }
 
 void MenuState::render(GameController* game) {
 	// 3D
-	glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LESS);	//深度测试的比较函数
-	//GL_NEVER GL_LESS GL_LEQUAL GL_EQUAL GL_GREATER GL_GEQUAL GL_NOTEQUAL GL_ALWAYS
-	glClearColor(0.5f, 0.7f, 1.0f, 1.0f); // 天空蓝
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	if (menuWorld->generationComplete.load()) {
 
-	menuShader->use();
+		glEnable(GL_DEPTH_TEST);
+		glDepthFunc(GL_LESS);	//深度测试的比较函数
+		//GL_NEVER GL_LESS GL_LEQUAL GL_EQUAL GL_GREATER GL_GEQUAL GL_NOTEQUAL GL_ALWAYS
+		glClearColor(0.5f, 0.7f, 1.0f, 1.0f); // 天空蓝
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	glm::mat4 projection = glm::perspective(
-		glm::radians(menuCamera->cameraZoom),
-		(float)1920.0f / (float)1080.f,
-		0.1f, 1000.0f
-	);
-	menuShader->setMat4("projection", projection);
+		menuShader->use();
 
-	glm::mat4 view = menuCamera->getViewMatrix();
-	menuShader->setMat4("view", view);
+		glm::mat4 projection = glm::perspective(
+			glm::radians(menuCamera->cameraZoom),
+			(float)1920.0f / (float)1080.f,
+			0.1f, 1000.0f
+		);
+		menuShader->setMat4("projection", projection);
 
-	glm::mat4 model = glm::mat4(1.0f);
-	menuShader->setMat4("model", model);
+		glm::mat4 view = menuCamera->getViewMatrix();
+		menuShader->setMat4("view", view);
 
-	menuShader->setVec3("lightPos", glm::vec3(0.0f, 256.0f, 0.0f));
-	menuShader->setVec3("viewPos", menuCamera->cameraPosition);
-	menuShader->setVec3("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
+		glm::mat4 model = glm::mat4(1.0f);
+		menuShader->setMat4("model", model);
 
-	menuWorld->render(*menuShader);
+		menuShader->setVec3("lightPos", glm::vec3(0.0f, 256.0f, 0.0f));
+		menuShader->setVec3("viewPos", menuCamera->cameraPosition);
+		menuShader->setVec3("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
 
-	glDisable(GL_DEPTH_TEST); // 避免 UI 被深度测试挡住
-	glDisable(GL_CULL_FACE);
+		menuWorld->render(*menuShader);
+
+		glDisable(GL_DEPTH_TEST); // 避免 UI 被深度测试挡住
+		glDisable(GL_CULL_FACE);
+
+	}
 
 	//UI
 	glClear(GL_DEPTH_BUFFER_BIT);
@@ -112,6 +125,11 @@ bool MenuState::enter(GameController* game) {
 	menuShader = new Shader("render/vertex.glsl", "render/fragment.glsl");
 
 	menuWorld = new World(2757840732);
+
+	LoadingState::getInstance().enter(game); //应当封装的更深，把	menuWorld->startGenerate();当作参数传递给Load结束完自动调用exit
+	LoadingState::getInstance().setProgress(-1.0f);
+	LoadingState::getInstance().setText("Loading");
+	menuWorld->startGenerate();
 
 	//glfwMakeContextCurrent(game->getWindowInstance());
 

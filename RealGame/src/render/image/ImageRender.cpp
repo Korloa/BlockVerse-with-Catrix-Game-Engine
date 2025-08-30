@@ -1,4 +1,11 @@
-﻿#include "render/image/ImageRender.h"
+﻿/*
+ * Copyright (c) 2025 Kaixiang Zhang (张凯翔). All rights reserved.
+ * Author: Kaixiang Zhang
+ * File: [Chunk.cpp]
+ * Description: [Control the generation logic of the chunk.]
+ */
+
+#include "render/image/ImageRender.h"
 #include "render/Shader.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"

@@ -42,23 +42,32 @@ public:
 	std::vector<std::vector<std::vector<int>>> blocks;
 	unsigned int VAO, VBO, EBO;
 	unsigned int vertexCount;
+
+	bool meshBuilt;
 	bool needsUpdate;
 
 	Chunk(int chunkX, int chunkZ, int worldSeed);
 	~Chunk();
 
 	void generateTerrain();
-	void updateMesh();
+	void buildMesh();		//CPU cast time
+	void uploadMesh();		//GPU
 	void render();
+
+
 	int getBlock(int x, int y, int z) const;
 	int setBlock(int x, int y, int z, blockType type);
 	bool isBlockExposed(int x, int y, int z) const;
+
+	//缓存CPU数据，GPU缓存
+	std::vector<Vertex>vertices;
+	std::vector<unsigned int>indices;
 
 private:
 	int seed;
 	Noise noise;
 	//初始化OpenGL缓存区域
-	void setupMesh();
+	//void setupMesh();
 	void addFace(std::vector<Vertex>& vertices,
 		std::vector<unsigned int>& indices,
 		const glm::vec3& normal,

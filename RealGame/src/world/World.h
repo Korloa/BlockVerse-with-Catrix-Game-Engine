@@ -13,20 +13,34 @@
 #include <map>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <thread>
+#include <atomic>
+#include <mutex>
 
 //后期可以更改
-const int renderDistance = 10;
+const int renderDistance = 8;
 
 class World {
 public:
 	int seed;
+
+	int totalCount;
 
 	std::map<std::pair<int,int>, Chunk*>chunks;
 
 	World(int seed);
 	~World();
 
-	void generateWorld(int seed);
+	mutable std::mutex genMutex;
+	std::atomic<bool> generationComplete{ false };
+
+	std::atomic<int> generatedCount{ 0 };
+	int renderCount;
+
+	void startGenerate();
+	void generateChunk(Chunk* chunk);
+	void generateWorldAsync();
+
 
 	void render(Shader& shader);
 	Chunk* getChunk(int x, int z);

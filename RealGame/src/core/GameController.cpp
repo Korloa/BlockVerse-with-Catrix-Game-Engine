@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2025 Kaixiang Zhang (张凯翔). All rights reserved.
+ * Author: Kaixiang Zhang
+ * File: [Chunk.cpp]
+ * Description: [Control the generation logic of the chunk.]
+ */
+
+
 #include "core/GameController.h"
 
 #include "states/basic/State.h"
@@ -6,6 +14,7 @@
 #include "states/gameState/GameState.h"			//游戏中
 #include "states/settingState/SettingState.h"	//设置
 #include "states/menuState/MenuState.h"			//菜单
+#include "states/loadingState/LoadingState.h"	//过渡
 #include "core/InputManager.h"
 
 GameController* gameInstance = nullptr;
@@ -25,6 +34,8 @@ bool GameController::initialize() {
 	cfg = new gameConfig();
 
 	glfwInit();
+
+	loadingState = &LoadingState::getInstance();
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -62,9 +73,16 @@ void GameController::run() {
 		//存在一些问题，无法关闭窗口
 		float delta = calcFrame();
 		if (!stateStack.empty()) {
-			stateStack.back()->procInput(this,delta);
 			stateStack.back()->update(this, delta);
-			stateStack.back()->render(this);
+			if (loadingState->visible) {
+				loadingState->render(this);
+				loadingState->update(this,delta);
+				loadingState->procInput(this, delta);
+			}
+			else {
+				stateStack.back()->procInput(this, delta);
+				stateStack.back()->render(this);
+			}
 		}
 		//双缓冲机制
 		if (gameWindow) {

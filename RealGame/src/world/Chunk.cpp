@@ -4,21 +4,19 @@
  * File: [Chunk.cpp]
  * Description: [Control the generation logic of the chunk.]
  */
+
+//10th-commit
+//将CPU与GPU任务分离，并将CPU子线程化
 #include "world/Chunk.h"
 #include <iostream>
 #include <cmath>
 #include <cstdlib>
 #include <sstream>
 
+#include "states/loadingState/LoadingState.h"
+
 Chunk::Chunk(int chunkX, int chunkZ,int worldSeed) :x(chunkX), z(chunkZ), needsUpdate(true),noise(seed),seed(worldSeed){
 	blocks.resize(chunkSize, std::vector<std::vector<int>>(chunkHeight, std::vector<int>(chunkSize, AIR)));
-
-	std::ostringstream oss;
-	oss << "Generating the special chunk...    " << "Chunk Number:(" << this->x << " , " << this->z << ")";
-	console.info(oss.str());
-
-	setupMesh();
-	generateTerrain();
 }
 
 //VAO Vertex Array Object	顶点数组对象
@@ -32,13 +30,12 @@ Chunk::~Chunk() {
 	glDeleteBuffers(1, &EBO);
 }
 
-void Chunk::setupMesh() {
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
-	glGenBuffers(1, &EBO);
-}
 
 void Chunk::generateTerrain() {
+	std::ostringstream oss;
+	oss << "Generating Terrain for chunk("<< this->x << "," << this->z << ")...";
+	console.info(oss.str());
+	LoadingState::getInstance().setText(oss.str());
 	int orginx = this->x * chunkSize;
 	int orginy = this->z * chunkSize;
 	for (int ix = 0; ix < chunkSize; ix++) {
@@ -74,16 +71,15 @@ void Chunk::generateTerrain() {
 	needsUpdate = true;
 }
 
-void Chunk::updateMesh() {
-	if (!needsUpdate)
-		return;
+void Chunk::buildMesh() {
+	//if (!needsUpdate || meshBuilt)
+	//	return;
 
-	std::ostringstream oss;
-	oss << "Start rendering the special chunk..." << "Chunk Number:(" << this->x << " , " << this->z << ")";
+	/*std::ostringstream oss;
+	oss << "Generating mesh for chunk(" << this->x << "," << this->z << ")...";
 	console.info(oss.str());
+	LoadingState::getInstance().setText(oss.str());*/
 
-	std::vector<Vertex> vertices;
-	std::vector<unsigned int>indices;
 	for (int x = 0; x < chunkSize; x++) {
 		for (int y = 0; y < chunkHeight; y++) {
 			for (int z = 0; z < chunkSize; z++) {
@@ -198,13 +194,25 @@ void Chunk::updateMesh() {
 	}
 	//FOR END
 
+	meshBuilt = true;
+	needsUpdate = false;
+
+
 	vertexCount = indices.size();
+}
+
+
+void Chunk::uploadMesh() {
+
+	glGenVertexArrays(1, &VAO);
+	glGenBuffers(1, &VBO);
+	glGenBuffers(1, &EBO);
 
 	glBindVertexArray(VAO);
 
 	// 将顶点放入缓存
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size()*sizeof(Vertex),&vertices[0],GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), &vertices[0], GL_STATIC_DRAW);
 
 	// 将索引放入缓存
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
@@ -229,7 +237,6 @@ void Chunk::updateMesh() {
 
 	// 显示松绑，避免状态泄露
 	glBindVertexArray(0);
-	needsUpdate = false;
 }
 
 // addFace 添加一个面
@@ -271,8 +278,6 @@ void Chunk::addFace(std::vector<Vertex>& vertices,
 }
 
 void Chunk::render() {
-	if (needsUpdate)
-		updateMesh();
 	glBindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, vertexCount, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);

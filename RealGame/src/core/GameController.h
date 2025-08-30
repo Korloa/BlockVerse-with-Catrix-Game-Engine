@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2025 Kaixiang Zhang (张凯翔). All rights reserved.
+ * Author: Kaixiang Zhang
+ * File: [Chunk.cpp]
+ * Description: [Control the generation logic of the chunk.]
+ */
+
 #pragma once
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -12,6 +19,8 @@
 #include "render/image/ImageRender.h"
 
 #include "core/InputManager.h"
+
+class LoadingState;
 
 // State类应该使用前向声明，这里出现了循环包含头文件的问题，出现了编译错误，这里如果包含的话会出现顺序问题
 class State;
@@ -41,6 +50,8 @@ public:
 	gameConfig* getConfig() { return cfg; }
 
 	InputManager& getInputManager() { return InputManager::getInstance(); }
+
+	LoadingState* loadingState;
 
 	TextRender* textRender;
 	ImageRender* imageRender;

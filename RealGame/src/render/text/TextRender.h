@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2025 Kaixiang Zhang (’≈ø≠œË). All rights reserved.
+ * Author: Kaixiang Zhang
+ * File: [Chunk.cpp]
+ * Description: [Control the generation logic of the chunk.]
+ */
+
 #pragma once
 #include <GL/glew.h>
 #include <glm/glm.hpp>
@@ -17,6 +24,7 @@ public:
 	~TextRender();
 	bool initialize(const std::string& fontPath, unsigned int fontSize);
 	float renderText(const std::string& text, float x, float y, float scale,glm::vec3 color,bool render=true);
+	float getTextWidth(const std::string& text, float scale);
 private:
 	FT_Library ft;
 	FT_Face face;

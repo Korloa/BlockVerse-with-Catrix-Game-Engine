@@ -151,7 +151,7 @@
     <ClInclude Include="src\states\flashScreen\FlashScreen.h" />
     <ClInclude Include="src\states\gameLoader\GameLoader.h" />
     <ClInclude Include="src\states\gameState\GameState.h" />
-    <ClInclude Include="src\states\loadingTransition\loadingTransition.h" />
+    <ClInclude Include="src\states\loadingState\LoadingState.h" />
     <ClInclude Include="src\states\menuState\MenuState.h" />
     <ClInclude Include="src\states\netGameStarter\netGameStarter.h" />
     <ClInclude Include="src\states\settingState\SettingState.h" />
@@ -182,7 +182,7 @@
     <ClCompile Include="src\states\flashScreen\FlashScreen.cpp" />
     <ClCompile Include="src\states\gameLoader\GameLoader.cpp" />
     <ClCompile Include="src\states\gameState\GameState.cpp" />
-    <ClCompile Include="src\states\loadingTransition\loadingTransition.cpp" />
+    <ClCompile Include="src\states\loadingState\LoadingState.cpp" />
     <ClCompile Include="src\states\menuState\MenuState.cpp" />
     <ClCompile Include="src\states\netGameStarter\netGameStarter.cpp" />
     <ClCompile Include="src\states\settingState\SettingState.cpp" />

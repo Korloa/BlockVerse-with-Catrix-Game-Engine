@@ -104,7 +104,7 @@
     <Filter Include="src\render\physics">
       <UniqueIdentifier>{7ce66ec8-a2ef-4f19-96eb-a70e3268ab41}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\states\loadingTransition">
+    <Filter Include="src\states\loadingState">
       <UniqueIdentifier>{66c96149-6914-441e-b47c-a571a17d3fd6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -190,8 +190,8 @@
     <ClCompile Include="src\utils\GLFWextension.cpp">
       <Filter>src\utils</Filter>
     </ClCompile>
-    <ClCompile Include="src\states\loadingTransition\loadingTransition.cpp">
-      <Filter>src\states\loadingTransition</Filter>
+    <ClCompile Include="src\states\loadingState\LoadingState.cpp">
+      <Filter>src\states\loadingState</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -279,8 +279,8 @@
     <ClInclude Include="src\utils\GLFWextension.h">
       <Filter>src\utils</Filter>
     </ClInclude>
-    <ClInclude Include="src\states\loadingTransition\loadingTransition.h">
-      <Filter>src\states\loadingTransition</Filter>
+    <ClInclude Include="src\states\loadingState\LoadingState.h">
+      <Filter>src\states\loadingState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

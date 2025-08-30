@@ -6,34 +6,69 @@
  */
 #include "world/World.h"
 
+
+#include "states/loadingState/LoadingState.h"
+#include "core/GameController.h"
+
 World::World(int seed):seed(seed) {
 	console.info("Initializing the world...");
-	generateWorld(seed);
+	totalCount = (2 * renderDistance + 1) * (2 * renderDistance + 1);
 }
 
 World::~World() {
 	for (auto& pair : chunks)
 		delete pair.second;
 }
-void World::generateWorld(int seed) {
+void World::startGenerate() {
+	std::thread([this]() {generateWorldAsync(); }).detach();
+}
+
+void World::generateWorldAsync() {
+	generatedCount = 0;
 	for (int x = -renderDistance; x <= renderDistance; x++) {
 		for (int z = -renderDistance; z <= renderDistance; z++) {
 			std::pair<int, int> key = { x,z };
-			if (chunks.find(key) == chunks.end())
-				chunks[key] = new Chunk(x, z,seed);
+			if (chunks.find(key) == chunks.end()) {
+
+				Chunk* chunk = new Chunk(x, z, seed);
+
+				generateChunk(chunk);
+
+				{
+					std::lock_guard<std::mutex> lock(genMutex);
+					chunks[key] = chunk;
+				}
+
+				generatedCount++;
+				LoadingState::getInstance().setProgress((float)generatedCount / (float)totalCount);
+			}
 		}
 	}
+	generationComplete = true;
+
+	LoadingState::getInstance().exit(gameInstance);
+}
+
+void World::generateChunk(Chunk* chunk) {
+	chunk->generateTerrain();
+	chunk->buildMesh();
 }
 
 void World::render(Shader& shader) {
-	int index = 1;
+	renderCount = 0;
 	for (auto& pair : chunks) {
 		int chunkX = pair.first.first;
 		int chunkZ = pair.first.second;
-		glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(chunkX * chunkSize, 0, chunkZ * chunkSize));
-		shader.setMat4("model", model);
-		pair.second->render();
-		index++;
+		if (pair.second->meshBuilt && pair.second->VAO == 0) {
+			pair.second->uploadMesh();
+		}
+
+		if (pair.second->VAO != 0) {
+			glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(chunkX * chunkSize, 0, chunkZ * chunkSize));
+			shader.setMat4("model", model);
+			pair.second->render();
+		}
+		renderCount++;
 	}
 }
 // 注意这里的x,z是块的索引，而不是世界坐标

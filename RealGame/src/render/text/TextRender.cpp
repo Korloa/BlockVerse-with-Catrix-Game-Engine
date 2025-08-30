@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2025 Kaixiang Zhang (张凯翔). All rights reserved.
+ * Author: Kaixiang Zhang
+ * File: [Chunk.cpp]
+ * Description: [Control the generation logic of the chunk.]
+ */
+
 #include "render/text/TextRender.h"
 #include "render/Shader.h"
 #include "debug/Console.h"
@@ -20,8 +27,6 @@ TextRender::~TextRender() {
 }
 
 bool TextRender::initialize(const std::string& fontPath, unsigned int fontSize) {
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     if (FT_Init_FreeType(&ft)) {
         console.error("Failed to initialize FreeType textrender.");
@@ -83,6 +88,9 @@ bool TextRender::initialize(const std::string& fontPath, unsigned int fontSize) 
 }
 
 float TextRender::renderText(const std::string& text, float x, float y, float scale, glm::vec3 color, bool render) {
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
     textShader->use();
     glm::mat4 projection = glm::ortho(0.0f, 1920.0f, 1080.0f, 0.0f);
     textShader->setMat4("projection", projection);
@@ -157,6 +165,53 @@ float TextRender::renderText(const std::string& text, float x, float y, float sc
     }
     glBindVertexArray(0);
     glBindTexture(GL_TEXTURE_2D, 0);
+
+    return width;
+}
+
+// TextRender.cpp
+float TextRender::getTextWidth(const std::string& text, float scale) {
+    float width = 0.0f;
+
+    for (const auto& c : text) {
+        // 如果字符还没加载，尝试加载
+        if (characters.find(c) == characters.end()) {
+            if (face && !FT_Load_Char(face, c, FT_LOAD_RENDER)) {
+                GLuint texture;
+                glGenTextures(1, &texture);
+                glBindTexture(GL_TEXTURE_2D, texture);
+                glTexImage2D(
+                    GL_TEXTURE_2D,
+                    0,
+                    GL_RED,
+                    face->glyph->bitmap.width,
+                    face->glyph->bitmap.rows,
+                    0,
+                    GL_RED,
+                    GL_UNSIGNED_BYTE,
+                    face->glyph->bitmap.buffer
+                );
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+                characters[c] = {
+                    texture,
+                    glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
+                    glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
+                    static_cast<GLuint>(face->glyph->advance.x)
+                };
+            }
+            else {
+                // 加载失败，跳过
+                continue;
+            }
+        }
+
+        const Character& ch = characters[c];
+        width += (ch.advance >> 6) * scale;  // advance 是 1/64 像素，所以右移 6 位
+    }
 
     return width;
 }
