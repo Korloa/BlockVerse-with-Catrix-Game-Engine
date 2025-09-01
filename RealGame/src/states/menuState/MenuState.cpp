@@ -146,17 +146,24 @@ bool MenuState::enter(GameController* game) {
 	pageButtons.emplace(
 		MENU::MAIN,  
 		std::vector<Button>{
-			Button(glm::vec2(960 - buttonWidth/2, buttonTop), glm::vec2(buttonWidth, buttonHeight), "New Game", [](GameController* g) { g->replaceState(new SingleGameStarter()); }),
-			Button(glm::vec2(960 - buttonWidth / 2, buttonTop+ 1* buttonMargin), glm::vec2(buttonWidth, buttonHeight), "Load Game", [](GameController* g) { g->replaceState(new GameLoader()); }),
-			Button(glm::vec2(960 - buttonWidth / 2, buttonTop +2* buttonMargin), glm::vec2(buttonWidth, buttonHeight), "Online Game", [](GameController* g) { g->replaceState(new NetGameStarter()); }),
-			Button(glm::vec2(960 - buttonWidth / 2, buttonTop +3* buttonMargin), glm::vec2(buttonWidth, buttonHeight), "Settings", [](GameController* g) { g->replaceState(new SettingState()); })
+			Button(glm::vec2(960 - buttonWidth  /2, buttonTop), glm::vec2(buttonWidth, buttonHeight), "New Game", [](GameController* g) { g->pushState(new SingleGameStarter()); }),
+			Button(glm::vec2(960 - buttonWidth / 2, buttonTop + 1 * buttonMargin), glm::vec2(buttonWidth, buttonHeight), "Load Game", [](GameController* g) {g->pushState(new GameLoader()); }),
+			Button(glm::vec2(960 - buttonWidth / 2, buttonTop +2* buttonMargin), glm::vec2(buttonWidth, buttonHeight), "Online Game", [](GameController* g) { g->pushState(new NetGameStarter()); }),
+			Button(glm::vec2(960 - buttonWidth / 2, buttonTop +3* buttonMargin), glm::vec2(buttonWidth, buttonHeight), "Settings", [](GameController* g) { g->pushState(new SettingState()); })
 		}
 	);
+
+	for (auto& btn : pageButtons[MENU::MAIN]) {
+		btn.initialize();
+	}
 
 	return true;
 }
 
 bool MenuState::exit(GameController* game) {
 	console.info("Exiting the Menu State.");
+	for (auto& btn : pageButtons[MENU::MAIN]) {
+		btn.removeCallback();
+	}
 	return true;
 }

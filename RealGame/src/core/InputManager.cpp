@@ -58,7 +58,11 @@ void InputManager::sendKeyCallback(GLFWwindow* window, int key, int scancode, in
 		keyEvent event{key,action,mods};
 
 		for (const auto& pair : im.keyCallbacks) {
-			pair.second(event);
+			if (im.wasDelete(pair.first)) {
+				im.keyCallbacks.erase(pair.first);
+			}
+			else
+				pair.second(event);
 		}
 	}
 }
@@ -70,7 +74,11 @@ void InputManager::sendMouseButtonCallback(GLFWwindow* window, int key, int acti
 	mouseButtonEvent event{ key,action,mods,mouseX,mouseY };
 
 	for (const auto& pair : im.mouseButtonCallbacks) {
-		pair.second(event);
+		if (im.wasDelete(pair.first)) {
+			//xx.mouseButtonCallbacks.erase(pair.first);
+		}
+		else
+			pair.second(event);
 	}
 }
 
@@ -81,7 +89,11 @@ void InputManager::sendMouseScrollCallback(GLFWwindow* windwo, double xoffset, d
 	mouseScrollEvent event{ xoffset,yoffset };
 
 	for (const auto& pair : im.mouseScrollCallbacks) {
-		pair.second(event);
+		if (im.wasDelete(pair.first)) {
+			im.mouseScrollCallbacks.erase(pair.first);
+		}
+		else
+			pair.second(event);
 	}
 }
 
@@ -91,25 +103,33 @@ void InputManager::sendMouseMoveCallback(GLFWwindow* window, double mouseX, doub
 	mouseMoveEvent event{ mouseX,mouseY };
 
 	for (const auto& pair : im.mouseMoveCallbacks) {
-		pair.second(event);
+		if (im.wasDelete(pair.first)) {
+			//im.mouseMoveCallbacks.erase(pair.first);
+		}
+		else
+			pair.second(event);
 	}
 }
 
 void InputManager::removeKeyCallback(callbackId removeId) {
 	console.info("Key callback removed one.");
-	keyCallbacks.erase(removeId);
+	delSet.insert(removeId);
+
 }
 void InputManager::removeMouseButtonCallback(callbackId removeId) {
 	console.info("Mouse button callback removed one.");
-	mouseButtonCallbacks.erase(removeId);
+	delSet.insert(removeId);
+
 }
 void InputManager::removeMouseMoveCallback(callbackId removeId) {
 	console.info("Mouse move callback removed one.");
-	mouseMoveCallbacks.erase(removeId);
+	delSet.insert(removeId);
+
 }
 void InputManager::removeMouseScrollCallback(callbackId removeId) {
 	console.info("Mouse scroll callback removed one.");
-	mouseScrollCallbacks.erase(removeId);
+	delSet.insert(removeId);
+
 }
 
 

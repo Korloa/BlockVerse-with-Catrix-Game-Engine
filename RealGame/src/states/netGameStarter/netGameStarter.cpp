@@ -16,11 +16,11 @@ void NetGameStarter::render(GameController* game) {
 }
 
 bool NetGameStarter::exit(GameController* game) {
-	console.info("Exiting the GameLoader State.");   
+	console.info("Exiting the netGameStarter State.");   
 	return true;
 }
 
 bool NetGameStarter::enter(GameController* game) {
-	console.info("Entering the GameLoader State.");
+	console.info("Entering the netGameStater State.");
 	return true;
 }

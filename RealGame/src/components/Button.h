@@ -11,15 +11,20 @@
 #include <functional>
 #include "render/2dObj/RectRender.h"
 #include "render/text/TextRender.h"
+#include "debug/Console.h"
+#include "core/InputManager.h"
 
 class GameController;			//前向声明Game
 
 struct Button {
+	bool remove = false;
+
 	glm::vec2 position;	//按钮左下角位置
 	glm::vec2 size;		//按钮宽高
 
 	std::string text;	//按钮文本
 	std::function<void(GameController*)> onClick;	//点击回调函数
+	callbackId funcId;
 
 	glm::vec3 bgColor =		 { 0.6f,0.6f,0.6f };		//按钮背景颜色
 	glm::vec3 hoverBgColor = { 0.8f,0.8f,1.0f };		//悬浮时按钮背景颜色
@@ -31,6 +36,9 @@ struct Button {
 
 	bool enabled = true;
 
+	void removeCallback();
+
+	void initialize();
 	
 	bool isHovered(double mouseX, double mouseY) {	//鼠标悬停
 		return	mouseX > position.x &&
@@ -43,4 +51,5 @@ struct Button {
 	void render(GameController* game,TextRender* textRender,RectRender* rectRender ,double mouseX, double mouseY);
 
 	Button(const glm::vec2& pos, const glm::vec2& size, const std::string& text, std::function<void(GameController*)>callback);
+	~Button();
 };

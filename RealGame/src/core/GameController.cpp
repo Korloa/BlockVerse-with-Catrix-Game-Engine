@@ -114,6 +114,11 @@ void GameController::popState() {
 	delete stateStack.back();
 	stateStack.pop_back();
 
+	/*if (!stateStack.empty()) {
+		stateStack.back()->enter(this);
+	}*/
+
+	console.info("2");
 	if (stateStack.empty())
 		console.warn("Empty state stack after popState.");
 }

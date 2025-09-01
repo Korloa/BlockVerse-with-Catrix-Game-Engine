@@ -49,7 +49,7 @@ void SlideState::render(GameController* game) {
 	game->imageRender->getImageAttrib(imagePath[imageIndex], tempImg);
 	game->imageRender->renderImage(
 		imagePath[imageIndex],     // 图片路径
-		0, 0,                    // 左下角 x, y
+		960 - tempImg->width/2, 540-tempImg->height/2,                    // 左下角 x, y
 		tempImg->width, tempImg->height,                    // 宽高
 		alpha                        // 透明度
 	);
@@ -63,7 +63,7 @@ bool SlideState::enter(GameController* game) {
 
 	GLFWmonitor* monitor = glfwGetPrimaryMonitor();
 	const GLFWvidmode* videoMode = glfwGetVideoMode(monitor);
-	mainWindow = glfwCreateWindow(videoMode->width, videoMode->height, "BlockVerse",monitor, NULL);
+	mainWindow = glfwCreateWindow(videoMode->width, videoMode->height, "BlockVerse",NULL, NULL);
 	game->setWindowInstance(mainWindow);
 
 	glfwMakeContextCurrent(mainWindow);

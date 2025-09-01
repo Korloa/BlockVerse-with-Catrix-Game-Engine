@@ -8,7 +8,7 @@
 #include <iostream>
 
 Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch) :
-	cameraFront(glm::vec3(0.0f,0.0f,-1.0f)),mouseMoveSpeed(2.5f),mouseSensitivity(0.1f),cameraZoom(45.0f){
+	cameraFront(glm::vec3(0.0f,0.0f,-1.0f)),mouseMoveSpeed(30.0f),mouseSensitivity(0.1f),cameraZoom(45.0f){
 
 	console.info("Initializing the camera system...");
 

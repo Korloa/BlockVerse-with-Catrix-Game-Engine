@@ -10,6 +10,7 @@
 #include <GLFW/glfw3.h>
 #include <vector>
 #include <unordered_map>
+#include <unordered_set>
 #include "debug/Console.h"
 
 //键盘响应
@@ -53,13 +54,19 @@ private:
 	//编译器构造默认函数,更安全
 
 	//按键状态
-	bool keyStates[GLFW_KEY_LAST + 1] = { false };
+	std::unordered_map<int, bool> keyStates;
+	std::unordered_map<int, bool> previousKeyStates;  
+	std::unordered_map<int, bool> mouseButtonStates;
+	std::unordered_map<int, bool> previousMouseButtonStates;
 	//回调列表
 	std::unordered_map<callbackId,keyCallback> keyCallbacks;
 	std::unordered_map<callbackId,mouseButtonCallback> mouseButtonCallbacks;
 	std::unordered_map<callbackId,mouseScrollCallback> mouseScrollCallbacks;
 	std::unordered_map<callbackId,mouseMoveCallback> mouseMoveCallbacks;
 	
+
+	std::unordered_set<callbackId> delSet;
+
 	//缓存鼠标
 	double mouseX = 0.0f;
 	double mouseY = 0.0f;
@@ -78,6 +85,8 @@ public:
 		static InputManager instance;
 		return instance;
 	}
+
+	bool wasDelete(callbackId id) { return delSet.find(id) != delSet.end(); }
 
 	callbackId allotId() { return nextId++; }
 

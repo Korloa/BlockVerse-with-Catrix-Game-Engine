@@ -10,7 +10,7 @@
 #include<vector>
 
 #include "components/Button.h"
-#include "components/TextInput.h"
+#include "components/InputBox.h"
 
 #include "core/GameController.h"
 
@@ -18,9 +18,9 @@ class TextRender;
 class RectRender;
 
 class State {
-protected:
-	std::vector<Button>sharedButtons;				//公有按钮，不会随页面切换而切换
+protected:			
 	std::vector<int> pageStack;
+	std::vector<Button>sharedButtons;//公有按钮，不会随页面切换而切换
 	std::map<int, std::vector<Button>>pageButtons;
 	//std::map<int, std::vector<TextInput>>pageTextInputs;	//尚未实现
 	std::map<int, float>keyTimes; //去抖计时
@@ -45,5 +45,12 @@ public:
 			return true;
 		}
 		return false;
+	}
+
+	void back(GameController* game) {
+		if(!pageStack.empty())
+			pageStack.pop_back();
+		if (pageStack.empty())
+			game->popState();
 	}
 };    

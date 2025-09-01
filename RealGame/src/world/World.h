@@ -18,7 +18,7 @@
 #include <mutex>
 
 //后期可以更改
-const int renderDistance = 8;
+const int renderDistance = 5;
 
 class World {
 public:

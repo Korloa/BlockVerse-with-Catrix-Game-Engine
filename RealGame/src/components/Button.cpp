@@ -7,6 +7,7 @@
 
 #include "Button.h"
 #include "core/GameController.h"
+#include "core/InputManager.h"
 
 void Button::render(GameController* game,TextRender* textRender,RectRender* rectRender, double mouseX, double mouseY) {
 	//要改进两个方向，每个game对应一个render渲染器，render来接手Rect,Text渲染而非game
@@ -25,4 +26,29 @@ void Button::render(GameController* game,TextRender* textRender,RectRender* rect
 
 }
 
-Button::Button(const glm::vec2& pos, const glm::vec2& size, const std::string& text, std::function<void(GameController*)>callback) :position(pos),size(size),text(text),onClick(callback){}
+Button::Button(const glm::vec2& pos, const glm::vec2& size, const std::string& text, std::function<void(GameController*)>callback) :position(pos),size(size),text(text),onClick(callback){
+}
+
+void Button::initialize() {
+	InputManager& im = InputManager::getInstance();
+	funcId = im.addMouseButtonCallback([&](const mouseButtonEvent& event) {
+		if (event.mouseX > position.x &&
+			event.mouseX < position.x + size.x &&
+			event.mouseY > position.y &&
+			event.mouseY < position.y + size.y && event.action == GLFW_PRESS && !remove) {
+			onClick(gameInstance);
+		}
+	});
+}
+
+Button::~Button() {
+	console.info("Button uninstalled");
+}
+
+void Button::removeCallback() {//这里应该加入多态
+	InputManager& im = InputManager::getInstance();
+	if (funcId < 0)
+		return;
+	remove = true;
+	im.removeMouseButtonCallback(funcId);
+}
